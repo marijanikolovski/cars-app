@@ -9,6 +9,9 @@ function App() {
           <li>
             <Link to="/cars">Cars</Link>
           </li>
+          <li>
+            <Link to="/add">Create new car</Link>
+          </li>
         </ul>
       </nav>
       <Router />
