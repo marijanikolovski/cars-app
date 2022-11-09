@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useHistory, useParams } from 'react-router-dom';
 import CarsService from '../service/CarsService';
 import { AddCarForm } from '../component/AddCarForm';
 
@@ -10,7 +10,7 @@ const years = (start = 1990, end = 2018) => {
 const engines = ['diesel', 'petrol', 'electric', 'hybrid'];
 
 export const AddCar = () => {
-
+    const { id } = useParams();
     const history = useHistory()
 
     const [newCar, setNewCar] = useState({
@@ -24,9 +24,13 @@ export const AddCar = () => {
     });
 
 
-    const handleSubmit = async (e) => {
+    const handleOnSubmit = async (e) => {
         e.preventDefault();
-        await CarsService.add(newCar);
+        if (id) {
+            await CarsService.edit(id, newCar);
+        } else {
+            await CarsService.add(newCar);
+        }
         history.push('/cars');
     };
 
@@ -54,6 +58,19 @@ export const AddCar = () => {
         `);
     };
 
+    const handleGetSingleCar = async (id) => {
+        if (id) {
+            const response = await CarsService.get(id);
+            setNewCar(response);
+        }
+    }
+
+    useEffect(() => {
+        if (id) {
+            handleGetSingleCar(id)
+        }
+    }, [id]);
+
     return (
         <div>
             <AddCarForm 
@@ -61,7 +78,7 @@ export const AddCar = () => {
                 setNewCar={setNewCar}
                 years={years}
                 engines={engines}
-                onSubmit={handleSubmit}
+                onSubmit={handleOnSubmit}
                 onReset={hadleResetForm}
                 onPreview={handlePreviewForm}
             />
