@@ -11,7 +11,6 @@ class CarsService {
         return data;
     }
 
-
     async get(id) {
         const data = await axiosInstance.get(`/cars/${id}`)
             return data;
@@ -19,6 +18,11 @@ class CarsService {
 
     async edit(id, newCar) {
         const data = await axiosInstance.put(`/cars/${id}`, newCar);
+        return data;
+    }
+
+    async delete(id) {
+        const data = await axiosInstance.delete(`/cars/${id}`)
         return data;
     }
 }

@@ -22,6 +22,21 @@ export const AppCars = () => {
         history.push(`/edit/${id}`);
     }
 
+    const handleDeleteCar = async (id) => {
+        const response = prompt(
+            "Enter 'ok' if you want to delete this car. "
+          );
+      
+          if (response !== 'ok') {
+            return;
+        }
+
+        await CarsService.delete(id);
+
+        const data = await CarsService.getAll();
+        setCars(data);
+    }
+
   return (
     <div>
         <h2>Cars:</h2>
@@ -38,6 +53,7 @@ export const AppCars = () => {
                     engine={car.engine}
                     numberOfDoors={car.numberOfDoors}
                     onEdit={handleEditCar}
+                    onDelete={handleDeleteCar}
                 />
         )}
         </ul>

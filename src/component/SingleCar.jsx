@@ -9,7 +9,8 @@ export const SingleCar = ({
     isAutomatic,
     engine,
     numberOfDoors,
-    onEdit
+    onEdit,
+    onDelete
 }) => {
   return (
     <div>
@@ -25,6 +26,12 @@ export const SingleCar = ({
           onClick={() => onEdit(id)}
         >
           {id ? 'Edit' : 'Add New Car'}
+        </button>
+        <button
+          type='submit'
+          onClick={() => onDelete(id)}
+        >
+          Delete
         </button>
     </div>
   )
