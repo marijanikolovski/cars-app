@@ -15,6 +15,7 @@ export const AddCarForm = ({
             <label>Brand:</label>
             <input 
               required
+              minLength='2'
               type="text" 
               value={newCar.brand}
               onChange={({target}) => 
@@ -22,12 +23,15 @@ export const AddCarForm = ({
             />
             <label>Model</label>
             <input 
+              required
+              minLength='2'
               type="text" 
               value={newCar.model}
               onChange={({target}) => 
                 setNewCar({...newCar, model: target.value})}
             />
             <select
+              required
               value={newCar.year}
               onChange={({ target }) =>
                 setNewCar({ ...newCar, year: Number(target.value) })
@@ -59,6 +63,7 @@ export const AddCarForm = ({
           <span>
             <label>Is it automatic?</label>
             <input
+              required
               type='checkbox'
               checked={newCar.isAutomatic}
               onChange={({ target }) => {
