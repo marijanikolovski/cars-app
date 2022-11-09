@@ -6,7 +6,8 @@ export const AddCarForm = ({
   years, 
   engines, 
   onSubmit,
-  onReset 
+  onReset,
+  onPreview 
 }) => {
   return (
     <div>
@@ -87,6 +88,12 @@ export const AddCarForm = ({
           onClick={onReset}
         >
           Reset
+        </button>
+        <button 
+          type="submit" 
+          onClick={onPreview}
+        >
+          Preview
         </button>
         </form>
     </div>

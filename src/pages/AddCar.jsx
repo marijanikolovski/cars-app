@@ -42,6 +42,18 @@ export const AddCar = () => {
         })
     }
 
+    const handlePreviewForm = () => {
+        alert(`
+        Brand: ${newCar.brand} \n
+        Model: ${newCar.model} \n
+        Year: ${newCar.year} \n
+        Max speed: ${newCar.maxSpeed} \n
+        Number of doors: ${newCar.numberOfDoors} \n
+        Automatic: ${newCar.isAutomatic ? 'Yes' : 'No'} \n
+        Engine: ${newCar.engine} \n
+        `);
+    };
+
     return (
         <div>
             <AddCarForm 
@@ -51,6 +63,7 @@ export const AddCar = () => {
                 engines={engines}
                 onSubmit={handleSubmit}
                 onReset={hadleResetForm}
+                onPreview={handlePreviewForm}
             />
         </div>
     )
