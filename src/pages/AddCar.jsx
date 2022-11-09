@@ -30,6 +30,18 @@ export const AddCar = () => {
         history.push('/cars');
     };
 
+    const hadleResetForm = () => {
+        setNewCar({
+            brand: '',
+            model: '',
+            year: years[0],
+            maxSpeed: '',
+            numberOfDoors: '',
+            isAutomatic: false,
+            engine: '',    
+        })
+    }
+
     return (
         <div>
             <AddCarForm 
@@ -38,6 +50,7 @@ export const AddCar = () => {
                 years={years}
                 engines={engines}
                 onSubmit={handleSubmit}
+                onReset={hadleResetForm}
             />
         </div>
     )
