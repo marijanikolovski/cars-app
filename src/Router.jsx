@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
+import { SingleCar } from './pages/SingleCar';
 import { AddCar } from './pages/AddCar'
 import { AppCars } from './pages/AppCars'
 import { AppLogin } from './pages/AppLogin';
@@ -10,6 +11,9 @@ export const Router = () => {
     <Switch>
         <Route exact path='/cars'>
             <AppCars />
+        </Route>
+        <Route path='/cars/:id'>
+            <SingleCar />
         </Route>
         <Route path='/add'>
             <AddCar />
