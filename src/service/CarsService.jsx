@@ -1,29 +1,64 @@
-import { axiosInstance } from './AxiosService'
+import { ApiService } from "./ApiService";
 
-class CarsService {
+class CarsService extends ApiService {
     async getAll() {
-        const data  = await axiosInstance.get('cars');
-        return data.data;
+        try {
+            const { data } = await this.client.get('cars');
+      
+            return data;
+          } catch (error) {
+            console.log(error);
+          }
+      
+          return [];
     }
 
     async add(newCar) {
-        const data = await axiosInstance.post('cars', newCar);
+        try {
+        const { data } = await this.client.post('cars', newCar);
+
         return data;
+        } catch (error) {
+        console.log(error);
+        }
+
+        return null;
     }
 
     async get(id) {
-        const data = await axiosInstance.get(`/cars/${id}`)
-            return data;
+        try {
+        const { data } = await this.client.get(`cars/${id}`);
+
+        return data;
+        } catch (error) {
+        console.log(error);
+        }
+
+        return {};
     }
 
     async edit(id, newCar) {
-        const data = await axiosInstance.put(`/cars/${id}`, newCar);
+        try {
+        const { data } = await this.client.put(`cars/${id}`, newCar);
+
         return data;
+        } catch (error) {
+        console.log(error);
+        }
+
+        return null;
     }
 
     async delete(id) {
-        const data = await axiosInstance.delete(`/cars/${id}`)
+        try {
+        const { data } = await this.client.delete(`cars/${id}`);
+
         return data;
+        } catch (error) {
+        console.log(error);
+        }
+
+        return {};
     }
 }
 
