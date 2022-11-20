@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { AddCar } from './pages/AddCar'
 import { AppCars } from './pages/AppCars'
 import { AppLogin } from './pages/AppLogin';
+import { AppRegister } from './pages/AppRegister';
 
 export const Router = () => {
   return (
@@ -18,6 +19,9 @@ export const Router = () => {
         </Route>
         <Route path='/login'>
             <AppLogin />
+        </Route>
+        <Route path='/register'>
+            <AppRegister />
         </Route>
     </Switch>
   )
