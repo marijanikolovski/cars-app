@@ -1,6 +1,6 @@
-import { ApiService } from "./ApiService";
+import HttpService from "./HttpService";
 
-class CarsService extends ApiService {
+class CarsService extends HttpService {
     async getAll() {
         try {
             const { data } = await this.client.get('cars');

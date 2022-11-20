@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom';
 import { AddCar } from './pages/AddCar'
 import { AppCars } from './pages/AppCars'
+import { AppLogin } from './pages/AppLogin';
 
 export const Router = () => {
   return (
@@ -14,6 +15,9 @@ export const Router = () => {
         </Route>
         <Route path='/edit/:id'>
             <AddCar />
+        </Route>
+        <Route path='/login'>
+            <AppLogin />
         </Route>
     </Switch>
   )
