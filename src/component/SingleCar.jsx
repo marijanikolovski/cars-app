@@ -5,10 +5,10 @@ export const SingleCar = ({
     brand,
     model,
     year,
-    maxSpeed,
-    isAutomatic,
+    max_speed,
+    is_automatic,
     engine,
-    numberOfDoors,
+    number_of_doors,
     onEdit,
     onDelete
 }) => {
@@ -17,15 +17,15 @@ export const SingleCar = ({
         <h3>Brand: {brand}</h3>
         <h3>Model: {model}</h3>
         <h3>Year: {year}</h3>
-        <h3>Max Speed: {maxSpeed}</h3>
-        <h3>Automatic: {isAutomatic}</h3>
+        <h3>Max Speed: {max_speed}</h3>
+        <h3>Automatic: {is_automatic}</h3>
         <h3>Engine: {engine}</h3>
-        <h3>Numer Of Doors: {numberOfDoors}</h3>
+        <h3>Numer Of Doors: {number_of_doors}</h3>
         <button
           type='submit'
           onClick={() => onEdit(id)}
         >
-          {id ? 'Edit' : 'Add New Car'}
+          Edit
         </button>
         <button
           type='submit'

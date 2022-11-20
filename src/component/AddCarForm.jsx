@@ -1,6 +1,7 @@
 import React from "react";
 
 export const AddCarForm = ({ 
+  id,
   newCar, 
   setNewCar, 
   years, 
@@ -45,27 +46,18 @@ export const AddCarForm = ({
             <label>Max speed</label>
             <input
               type='number'
-              value={newCar.maxSpeed}
+              value={newCar.max_speed}
               onChange={({ target }) =>
-                setNewCar({ ...newCar, maxSpeed: target.value })
+                setNewCar({ ...newCar, max_speed: target.value })
               }
             />
-          <label>Number of doors</label>
-          <input
-            type='number'
-            value={newCar.numberOfDoors}
-            onChange={({ target }) =>
-              setNewCar({ ...newCar, numberOfDoors: target.value })
-            }
-            required
-          />
           <span>
             <label>Is it automatic?</label>
             <input
               type='checkbox'
-              checked={newCar.isAutomatic}
+              checked={newCar.is_automatic}
               onChange={({ target }) => {
-                setNewCar({ ...newCar, isAutomatic: target.checked });
+                setNewCar({ ...newCar, is_automatic: target.checked });
             }}
           />
           </span>
@@ -83,8 +75,17 @@ export const AddCarForm = ({
               {engine}
             </span>
             ))}
+          <label>Number of doors</label>
+          <input
+            type='number'
+            value={newCar.number_of_doors}
+            onChange={({ target }) =>
+              setNewCar({ ...newCar, number_of_doors: target.value })
+            }
+            required
+          />
         <button type="submit">
-          Add new car
+          {id ? 'Edit' : 'Add car'}
         </button>
         <button 
           type="subimt" 
@@ -102,3 +103,4 @@ export const AddCarForm = ({
     </div>
   )
 }
+

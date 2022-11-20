@@ -17,12 +17,11 @@ export const AddCar = () => {
         brand: '',
         model: '',
         year: years[0],
-        maxSpeed: '',
-        numberOfDoors: '',
-        isAutomatic: false,
+        max_speed: '',
+        is_automatic: false,
         engine: '',
+        number_of_doors: '',
     });
-
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
@@ -39,10 +38,10 @@ export const AddCar = () => {
             brand: '',
             model: '',
             year: years[0],
-            maxSpeed: '',
-            numberOfDoors: '',
-            isAutomatic: false,
-            engine: '',    
+            max_speed: '',
+            is_automatic: false,
+            engine: '',
+            number_of_doors: '',  
         })
     }
 
@@ -51,9 +50,9 @@ export const AddCar = () => {
         Brand: ${newCar.brand} \n
         Model: ${newCar.model} \n
         Year: ${newCar.year} \n
-        Max speed: ${newCar.maxSpeed} \n
-        Number of doors: ${newCar.numberOfDoors} \n
-        Automatic: ${newCar.isAutomatic ? 'Yes' : 'No'} \n
+        Max speed: ${newCar.max_speed} \n
+        Number of doors: ${newCar.number_of_doors} \n
+        Automatic: ${newCar.is_automatic ? 'Yes' : 'No'} \n
         Engine: ${newCar.engine} \n
         `);
     };
@@ -74,6 +73,7 @@ export const AddCar = () => {
     return (
         <div>
             <AddCarForm 
+                id={id}
                 newCar={newCar}
                 setNewCar={setNewCar}
                 years={years}

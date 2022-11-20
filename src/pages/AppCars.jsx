@@ -48,10 +48,10 @@ export const AppCars = () => {
                     brand={car.brand} 
                     model={car.model}
                     year={car.year}
-                    maxSpeed={car.maxSpeed}
-                    isAutomatic={car.isAutomatic}
+                    max_speed={car.max_speed}
+                    is_automatic={car.is_automatic}
                     engine={car.engine}
-                    numberOfDoors={car.numberOfDoors}
+                    number_of_doors={car.number_of_doors}
                     onEdit={handleEditCar}
                     onDelete={handleDeleteCar}
                 />
