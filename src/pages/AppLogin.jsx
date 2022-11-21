@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginComponent } from "../component/LoginComponent";
-import authService from "../service/AuthService";
+import { authService } from "../service/AuthService";
 
 export const AppLogin = () => {
     const history = useHistory();
@@ -10,20 +10,19 @@ export const AppLogin = () => {
       password: "",
     });
   
-    async function handleSubmit(e) {
+    const handleOnLogin = async (e) => {
       e.preventDefault();
-        await authService.login(user);
-        history.push("/cars");
-
-      console.log("logged in successfully");
-    }
+      await authService.login(user);
+      console.log("login successfully");
+      history.push('/cars');
+    };
 
   return (
     <div>
         <LoginComponent 
             user={user}
             setUser={setUser}
-            onLogin={handleSubmit}
+            onLogin={handleOnLogin}
         />
     </div>
   )

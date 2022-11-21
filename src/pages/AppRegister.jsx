@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import authService from "../service/AuthService";
+import { authService } from "../service/AuthService";
 import { RegisterComponent } from "../component/RegisterComponent";
 
 export const AppRegister = () => {
@@ -11,13 +11,11 @@ export const AppRegister = () => {
     password: ""
   });
 
-
   async function handleSubmit(e) {
     e.preventDefault();
-
-      await authService.register(user);
-      history.push("/cars");
-    console.log("register in successfully");
+    await authService.register(user);
+    history.push("/cars");
+    console.log("register successfully");
   }
 
   return (
