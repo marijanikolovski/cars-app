@@ -1,11 +1,14 @@
 import React from "react";
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
-import { authService } from "../service/AuthService";
 
-export const Navbar = ({onLogout}) => {
-    // const history = useHistory();
-    const{ user } = useAuth()
+export const Navbar = () => {
+    const{ user, logout } = useAuth()
+
+    async function handleLogout() {
+      await logout();
+      console.log('logout successfully')
+    }
 
   return (
     <nav>
@@ -32,9 +35,9 @@ export const Navbar = ({onLogout}) => {
         )}
         {user.email && (
         <li>
-          <Link to="/logout" onClick={onLogout}>
+          <button type="submit" onClick={handleLogout}>
             Logout
-          </Link>
+          </button>
         </li>
         )}
       </ul>

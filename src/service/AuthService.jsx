@@ -56,6 +56,7 @@ class AuthService {
         localStorage.setItem("token", response.data.authorization.token);
         this.setAxiosAuthorizationHeader(response.data.authorization.token);
       }
+      return response.data
     } catch (error) {}
   }
 }

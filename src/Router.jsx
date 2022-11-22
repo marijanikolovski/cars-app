@@ -5,7 +5,6 @@ import { AddCar } from './pages/AddCar'
 import { AppCars } from './pages/AppCars'
 import { AppLogin } from './pages/AppLogin';
 import { AppRegister } from './pages/AppRegister';
-import { AppLogout } from './pages/AppLogout';
 import useAuth from './hooks/useAuth';
 
 const AuthRoute = ({ children, ...rest }) => {
@@ -49,9 +48,6 @@ export const Router = () => {
         <GuestRoute path='/register'>
             <AppRegister />
         </GuestRoute>
-        <AuthRoute path='/logout'>
-            <AppLogout />
-        </AuthRoute>
     </Switch>
   )
 }
