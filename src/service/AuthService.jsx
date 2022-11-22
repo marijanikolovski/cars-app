@@ -21,8 +21,8 @@ class AuthService {
     try {
       let response = await this.axiosInstance.post("/register", data);
       if (response.data.status === "success") {
-        localStorage.setItem("token", response.data.authorisation.token);
-        this.setAxiosAuthorizationHeader(response.data.authorisation.token);
+        localStorage.setItem("token", response.data.authorization.token);
+        this.setAxiosAuthorizationHeader(response.data.authorization.token);
         return response.data;
       }
     } catch (error) {}

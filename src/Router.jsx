@@ -1,32 +1,57 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { SingleCar } from './pages/SingleCar';
 import { AddCar } from './pages/AddCar'
 import { AppCars } from './pages/AppCars'
 import { AppLogin } from './pages/AppLogin';
 import { AppRegister } from './pages/AppRegister';
+import { AppLogout } from './pages/AppLogout';
+import useAuth from './hooks/useAuth';
+
+const AuthRoute = ({ children, ...rest }) => {
+    const{ user } = useAuth()
+
+    return (
+        <Route {...rest}>
+            {user.email ? children : <Redirect to="/login"/>}
+        </Route>
+        )
+}
+
+const GuestRoute = ({ children, ...rest }) => {
+    const{ user } = useAuth()
+
+    return (
+        <Route {...rest}>
+            {user.email ? <Redirect to="/cars"/> : children}
+        </Route>
+    )
+}
 
 export const Router = () => {
   return (
     <Switch>
-        <Route exact path='/cars'>
+        <AuthRoute exact path='/cars'>
             <AppCars />
-        </Route>
-        <Route path='/cars/:id'>
+        </AuthRoute>
+        <AuthRoute path='/cars/:id'>
             <SingleCar />
-        </Route>
-        <Route path='/add'>
+        </AuthRoute>
+        <AuthRoute path='/add'>
             <AddCar />
-        </Route>
-        <Route path='/edit/:id'>
+        </AuthRoute>
+        <AuthRoute path='/edit/:id'>
             <AddCar />
-        </Route>
-        <Route path='/login'>
+        </AuthRoute>
+        <GuestRoute path='/login'>
             <AppLogin />
-        </Route>
-        <Route path='/register'>
+        </GuestRoute>
+        <GuestRoute path='/register'>
             <AppRegister />
-        </Route>
+        </GuestRoute>
+        <AuthRoute path='/logout'>
+            <AppLogout />
+        </AuthRoute>
     </Switch>
   )
 }

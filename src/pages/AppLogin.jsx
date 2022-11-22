@@ -1,27 +1,25 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { LoginComponent } from "../component/LoginComponent";
-import { authService } from "../service/AuthService";
+import useAuth from "../hooks/useAuth";
 
 export const AppLogin = () => {
-    const history = useHistory();
-    const [user, setUser] = useState({
+    const { user, login } = useAuth();
+    const [newUser, setNewUser] = useState({
       email: "",
       password: "",
     });
   
     const handleOnLogin = async (e) => {
       e.preventDefault();
-      await authService.login(user);
+      await login(newUser);
       console.log("login successfully");
-      history.push('/cars');
     };
 
   return (
     <div>
         <LoginComponent 
-            user={user}
-            setUser={setUser}
+            user={newUser}
+            setUser={setNewUser}
             onLogin={handleOnLogin}
         />
     </div>
