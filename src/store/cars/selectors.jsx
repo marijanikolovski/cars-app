@@ -1,3 +1,3 @@
-const selectCars = (state) => state.cars.all;
+const selectCars = (state) => state.cars.cars;
 
 export { selectCars };
