@@ -1,13 +1,15 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 
 export const Navbar = () => {
+    const history = useHistory();
     const{ user, logout } = useAuth()
 
     async function handleLogout() {
       await logout();
       console.log('logout successfully')
+      history.push('/login');
     }
 
   return (
