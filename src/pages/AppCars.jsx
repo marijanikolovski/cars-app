@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectCars } from '../store/cars/selectors';
 import { setCars } from '../store/cars/slice';
 import { SingleCar } from '../component/SingleCar';
+import { CarsSearch } from '../component/CarsSearch';
+
 export const AppCars = () => {
     const history = useHistory();
 
@@ -23,6 +25,9 @@ export const AppCars = () => {
 
   return (
     <div>
+      <header>
+         <CarsSearch />
+      </header>
         <h2>Cars:</h2>
         <ul>
             {cars.map((car) => (

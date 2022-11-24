@@ -30,7 +30,6 @@ export const SingleCar = ({
     await CarsService.delete(id);
 
     dispatch(deleteCar(id));
-    history.push("/cars");
   };
 
   return (

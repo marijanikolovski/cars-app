@@ -4,6 +4,7 @@ export const carsSlice = createSlice({
   name: "cars",
   initialState: {
     cars: [],
+    search: null
   },
   reducers: {
     setCars: (state, action) => {
@@ -13,9 +14,13 @@ export const carsSlice = createSlice({
     deleteCar(state, action) {
       state.cars = state.cars.filter((car) => car.id !== action.payload);
     },
+
+    setSerch(state, action) {
+      state.search = action.payload; 
+    }
   },
 });
 
-export const { setCars, deleteCar } = carsSlice.actions;
+export const { setCars, deleteCar, setSerch } = carsSlice.actions;
 
 export default carsSlice.reducer;

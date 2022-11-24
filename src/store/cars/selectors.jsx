@@ -1,3 +1,4 @@
 const selectCars = (state) => state.cars.cars;
 
-export { selectCars };
+const selectSerch = (state) => state.cars.search
+export { selectCars, selectSerch };
