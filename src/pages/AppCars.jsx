@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import CarsService from '../service/CarsService'
-import { useHistory, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCars } from '../store/cars/selectors';
 import { setCars } from '../store/cars/slice';
 import { SingleCar } from '../component/SingleCar';
 import { CarsSearch } from '../component/CarsSearch';
+import { selectCarsFilter } from '../store/cars/selectors';
 
 export const AppCars = () => {
-    const history = useHistory();
+    const carsFilter = useSelector(selectCarsFilter)
 
     const cars = useSelector(selectCars)
     const dispatch = useDispatch()
-
-    const [selectedCarIds, setSelectedCarIds] = useState({});
 
     const handleGetCars = async () => {
         dispatch(setCars(await CarsService.getAll())) ;
@@ -30,12 +28,13 @@ export const AppCars = () => {
       </header>
         <h2>Cars:</h2>
         <ul>
-            {cars.map((car) => (
+            {carsFilter.map((car) => (
               <SingleCar
-                {...car}
+                {...car} 
                 key={car.id}
               />
             ))}
+            {carsFilter.length === 0 && (<h2>There is no wanted car.</h2>)}
           </ul>
     </div>
   )

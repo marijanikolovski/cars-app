@@ -4,11 +4,16 @@ export const carsSlice = createSlice({
   name: "cars",
   initialState: {
     cars: [],
-    search: null
+    search: {
+      brand: "",
+      model: "",
+    },
+    carsFilter: []
   },
   reducers: {
     setCars: (state, action) => {
       state.cars = action.payload;
+      state.carsFilter = [...action.payload];
     },
 
     deleteCar(state, action) {
@@ -16,7 +21,8 @@ export const carsSlice = createSlice({
     },
 
     setSerch(state, action) {
-      state.search = action.payload; 
+      state.carsFilter = state.cars.filter((car) =>
+        car.brand.includes(action. payload) || car.model.includes(action. payload)); 
     }
   },
 });
