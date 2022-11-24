@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { SingleCar } from './pages/SingleCar';
+import { SingleCar } from './component/SingleCar';
 import { AddCar } from './pages/AddCar'
 import { AppCars } from './pages/AppCars'
 import { AppLogin } from './pages/AppLogin';

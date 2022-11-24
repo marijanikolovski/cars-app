@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import CarsService from '../service/CarsService'
 import { useHistory, Link } from 'react-router-dom';
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCars } from '../store/cars/selectors';
+import { setCars } from '../store/cars/slice';
+import { SingleCar } from '../component/SingleCar';
 export const AppCars = () => {
     const history = useHistory();
 
-    const [cars, setCars] = useState();
+    const cars = useSelector(selectCars)
+    const dispatch = useDispatch()
+
+    const [selectedCarIds, setSelectedCarIds] = useState({});
 
     const handleGetCars = async () => {
-        const data = await CarsService.getAll();
-        setCars(data);
+        dispatch(setCars(await CarsService.getAll())) ;
     }
 
     useEffect(() => {
@@ -21,12 +25,13 @@ export const AppCars = () => {
     <div>
         <h2>Cars:</h2>
         <ul>
-        {cars && cars.map((car) => 
-            <li key={car.id}>
-                <Link to={`/cars/${car.id}`}>Brend: {car.brand}</Link>
-            </li>
-        )}
-        </ul>
+            {cars.map((car) => (
+              <SingleCar
+                {...car}
+                key={car.id}
+              />
+            ))}
+          </ul>
     </div>
   )
 }
