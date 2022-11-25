@@ -1,7 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import CarsService from "../service/CarsService";
-import { deleteCar } from "../store/cars/slice";
+import {  deleteCar } from "../store/cars/slice";
+import { setSelect } from "../store/cars/slice";
+import { selectSelect } from "../store/cars/selectors";
 
 export const SingleCar = ({
   id,
@@ -16,6 +18,8 @@ export const SingleCar = ({
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const selectCar = useSelector(selectSelect);
+  
   const handleEditCar = (id) => {
     history.push(`/edit/${id}`);
   };
@@ -33,7 +37,9 @@ export const SingleCar = ({
   };
 
   return (
-    <li>
+    <li style={{
+      border: "1px solid " + (selectCar.select === id && "red" ),
+    }}>
       <h3>Brand: {brand}</h3>
       <h3>Model: {model}</h3>
       <h3>Year: {year}</h3>
@@ -43,6 +49,7 @@ export const SingleCar = ({
       <h3>Numer Of Doors: {number_of_doors}</h3>
       <button onClick={() => handleEditCar(id)}>Edit</button>
       <button onClick={() => handleDeleteCar(id)}>Delete</button>
+      <button onClick={() => dispatch(setSelect(id))}>Select</button>
     </li>
   );
 };

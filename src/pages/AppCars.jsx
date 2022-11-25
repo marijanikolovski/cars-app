@@ -6,9 +6,11 @@ import { setCars } from '../store/cars/slice';
 import { SingleCar } from '../component/SingleCar';
 import { CarsSearch } from '../component/CarsSearch';
 import { selectCarsFilter } from '../store/cars/selectors';
+import { selectSelect } from '../store/cars/selectors';
 
 export const AppCars = () => {
     const carsFilter = useSelector(selectCarsFilter)
+    const selectCar = useSelector(selectSelect)
 
     const cars = useSelector(selectCars)
     const dispatch = useDispatch()
@@ -27,6 +29,7 @@ export const AppCars = () => {
          <CarsSearch />
       </header>
         <h2>Cars:</h2>
+        <h3>Number of selected cars: {selectCar.counter}</h3>
         <ul>
             {carsFilter.map((car) => (
               <SingleCar

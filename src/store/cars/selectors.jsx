@@ -4,4 +4,6 @@ const selectSerch = (state) => state.cars.search
 
 const selectCarsFilter = (state) => state.cars.carsFilter
 
-export { selectCars, selectSerch, selectCarsFilter };
+const selectSelect = (state) => state.cars.selectCars
+
+export { selectCars, selectSerch, selectCarsFilter, selectSelect };

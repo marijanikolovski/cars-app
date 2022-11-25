@@ -8,7 +8,11 @@ export const carsSlice = createSlice({
       brand: "",
       model: "",
     },
-    carsFilter: []
+    carsFilter: [],
+    selectCars: {
+      select: null,
+      counter: 0
+    }
   },
   reducers: {
     setCars: (state, action) => {
@@ -23,10 +27,15 @@ export const carsSlice = createSlice({
     setSerch(state, action) {
       state.carsFilter = state.cars.filter((car) =>
         car.brand.includes(action. payload) || car.model.includes(action. payload)); 
-    }
+    },
+
+    setSelect(state, action) {
+      state.selectCars.select = action.payload
+      state.selectCars.counter += 1;
+    },
   },
 });
 
-export const { setCars, deleteCar, setSerch } = carsSlice.actions;
+export const { setCars, deleteCar, setSerch, setSelect, setSelectCar } = carsSlice.actions;
 
 export default carsSlice.reducer;
