@@ -42,11 +42,31 @@ export const carsSlice = createSlice({
     setDeselectAll(state) {
       state.selectCars.select = null
     },
+
+    setSortByBrandAsc(state) {
+      state.sort = state.carsFilter.sort((a, b) => 
+        (a.brand > b.brand) ? 1 : -1)
+    },
+
+    setSortByBranDesc(state) {
+      state.sort = state.carsFilter.sort((a, b) => 
+        (a.brand > b.brand) ? -1 : 1)
+    },
+
+    setSortByMaxSpeedAsc(state) {
+      state.sort = state.carsFilter.sort((a, b) => 
+        (a.max_speed - b.max_speed))
+    },
+
+    setSortByMaxSpeedDesc(state) {
+      state.sort = state.carsFilter.sort((a, b) => 
+        (b.max_speed - a.max_speed))
+    }
   },
 });
 
 export const { setCars, deleteCar, setSerch, 
   setSelect, setSelectCar, setSelectAll, setDeselectAll, 
-  } = carsSlice.actions;
+  setSortByBrandAsc, setSortByBranDesc, setSortByMaxSpeedAsc, setSortByMaxSpeedDesc} = carsSlice.actions;
 
 export default carsSlice.reducer;
