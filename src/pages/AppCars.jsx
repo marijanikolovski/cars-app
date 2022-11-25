@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import CarsService from '../service/CarsService'
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCars } from '../store/cars/selectors';
-import { setCars } from '../store/cars/slice';
+import { selectSelectAll, setCars } from '../store/cars/slice';
 import { SingleCar } from '../component/SingleCar';
 import { CarsSearch } from '../component/CarsSearch';
 import { selectCarsFilter } from '../store/cars/selectors';
 import { selectSelect } from '../store/cars/selectors';
+import { setDeselectAll } from '../store/cars/slice';
 
 export const AppCars = () => {
     const carsFilter = useSelector(selectCarsFilter)
@@ -23,6 +24,10 @@ export const AppCars = () => {
         handleGetCars()
     }, [])
 
+    const handleDeselectAll = () => {
+      dispatch(setDeselectAll())
+    }
+
   return (
     <div>
       <header>
@@ -30,6 +35,8 @@ export const AppCars = () => {
       </header>
         <h2>Cars:</h2>
         <h3>Number of selected cars: {selectCar.counter}</h3>
+        <button onClick={handleDeselectAll}>Deselect All</button>
+
         <ul>
             {carsFilter.map((car) => (
               <SingleCar

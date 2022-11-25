@@ -11,7 +11,8 @@ export const carsSlice = createSlice({
     carsFilter: [],
     selectCars: {
       select: null,
-      counter: 0
+      counter: 0,
+      nova: {}
     }
   },
   reducers: {
@@ -33,9 +34,13 @@ export const carsSlice = createSlice({
       state.selectCars.select = action.payload
       state.selectCars.counter += 1;
     },
+    setDeselectAll(state, action) {
+      state.selectCars.select = null
+    }
+
   },
 });
 
-export const { setCars, deleteCar, setSerch, setSelect, setSelectCar } = carsSlice.actions;
+export const { setCars, deleteCar, setSerch, setSelect, setSelectCar, selectSelectAll, setDeselectAll } = carsSlice.actions;
 
 export default carsSlice.reducer;

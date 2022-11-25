@@ -19,7 +19,7 @@ export const SingleCar = ({
   const dispatch = useDispatch();
 
   const selectCar = useSelector(selectSelect);
-  
+
   const handleEditCar = (id) => {
     history.push(`/edit/${id}`);
   };
@@ -38,7 +38,7 @@ export const SingleCar = ({
 
   return (
     <li style={{
-      border: "1px solid " + (selectCar.select === id && "red" ),
+      border: "1px solid " + (selectCar.select === id ? "red" : 'white'),
     }}>
       <h3>Brand: {brand}</h3>
       <h3>Model: {model}</h3>
