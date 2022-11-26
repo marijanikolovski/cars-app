@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import CarsService from '../service/CarsService'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCars } from '../store/cars/selectors';
+import { selectCars, selectPage, selectCarsFilter, selectSelect } from '../store/cars/selectors';
 import { setCars } from '../store/cars/slice';
 import { SingleCar } from '../component/SingleCar';
 import { CarsSearch } from '../component/CarsSearch';
-import { selectCarsFilter } from '../store/cars/selectors';
-import { selectSelect } from '../store/cars/selectors';
 import { setDeselectAll } from '../store/cars/slice';
 import { setSelectAll } from '../store/cars/slice';
 import { setSortByBrandAsc } from '../store/cars/slice';
 import { setSortByBranDesc } from '../store/cars/slice';
 import { setSortByMaxSpeedAsc } from '../store/cars/slice';
 import { setSortByMaxSpeedDesc } from '../store/cars/slice';
+import { Pagination } from '../component/Pagination';
 
 export const AppCars = () => {
     const carsFilter = useSelector(selectCarsFilter)
     const selectCar = useSelector(selectSelect)
+    const page = useSelector(selectPage)
 
     const cars = useSelector(selectCars)
     const dispatch = useDispatch()
@@ -28,6 +28,10 @@ export const AppCars = () => {
     useEffect(() => {
         handleGetCars()
     }, [])
+
+     const lastCarIndex = page.current_page * page.cars_per_page
+     const firstCarIndex = lastCarIndex - page.cars_per_page
+     const currnetCars = carsFilter.slice(firstCarIndex, lastCarIndex)
 
   return (
     <div>
@@ -45,7 +49,7 @@ export const AppCars = () => {
           <button onClick={() => dispatch(setSortByMaxSpeedDesc())}>Sort by Max speed desc</button>
         </div>
         <ul>
-            {carsFilter.map((car) => (
+            {currnetCars.map((car) => (
               <SingleCar
                 {...car} 
                 key={car.id}
@@ -53,6 +57,10 @@ export const AppCars = () => {
             ))}
             {carsFilter.length === 0 && (<h2>There is no wanted car.</h2>)}
           </ul>
+          <Pagination 
+            totalCars={carsFilter.length}
+            carsPerPage={page.cars_per_page}
+          />
     </div>
   )
 }

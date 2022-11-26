@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 export const carsSlice = createSlice({
   name: "cars",
@@ -13,7 +14,12 @@ export const carsSlice = createSlice({
       select: [],
       counter: 0,
     },
-    sort: []
+    sort: [],
+    page: {
+      current_page: 1,
+      cars_per_page: 3
+    },
+    currentCar: null
   },
   reducers: {
     setCars: (state, action) => {
@@ -61,12 +67,17 @@ export const carsSlice = createSlice({
     setSortByMaxSpeedDesc(state) {
       state.sort = state.carsFilter.sort((a, b) => 
         (b.max_speed - a.max_speed))
-    }
+    },
+
+    setPaginated(state, action) {
+      state.page.current_page = action.payload
+    },
   },
 });
 
 export const { setCars, deleteCar, setSerch, 
-  setSelect, setSelectCar, setSelectAll, setDeselectAll, 
-  setSortByBrandAsc, setSortByBranDesc, setSortByMaxSpeedAsc, setSortByMaxSpeedDesc} = carsSlice.actions;
+  setSelect, setSelectCar, setSelectAll, setDeselectAll, setSortByBrandAsc, 
+  setSortByBranDesc, setSortByMaxSpeedAsc, setSortByMaxSpeedDesc, setPaginated
+} = carsSlice.actions;
 
 export default carsSlice.reducer;
