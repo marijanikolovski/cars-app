@@ -1,15 +1,18 @@
 import React from "react";
+import { setNewCar } from "../store/cars/slice";
+import { useDispatch, useSelector } from 'react-redux';
+import { selectNewCar } from "../store/cars/selectors";
 
 export const AddCarForm = ({ 
   id,
-  newCar, 
-  setNewCar, 
   years, 
   engines, 
   onSubmit,
   onReset,
   onPreview 
 }) => {
+  const dispatch = useDispatch();
+  const newCar = useSelector(selectNewCar)
   return (
     <div>
         <form onSubmit={onSubmit}>
@@ -20,7 +23,7 @@ export const AddCarForm = ({
               type="text" 
               value={newCar.brand}
               onChange={({target}) => 
-                setNewCar({...newCar, brand: target.value})}
+                dispatch(setNewCar({...newCar, brand: target.value}))}
             />
             <label>Model</label>
             <input 
@@ -29,13 +32,12 @@ export const AddCarForm = ({
               type="text" 
               value={newCar.model}
               onChange={({target}) => 
-                setNewCar({...newCar, model: target.value})}
+                dispatch(setNewCar({...newCar, model: target.value}))}
             />
             <select
               value={newCar.year}
               onChange={({ target }) =>
-                setNewCar({ ...newCar, year: Number(target.value) })
-              }
+                 dispatch(setNewCar({ ...newCar, year: Number(target.value)}))}
             >
               {years().map((year, index) => (
                 <option key={index} value={year}>
@@ -48,8 +50,7 @@ export const AddCarForm = ({
               type='number'
               value={newCar.max_speed}
               onChange={({ target }) =>
-                setNewCar({ ...newCar, max_speed: target.value })
-              }
+                dispatch(setNewCar({ ...newCar, max_speed: target.value }))}
             />
           <span>
             <label>Is it automatic?</label>
@@ -57,7 +58,7 @@ export const AddCarForm = ({
               type='checkbox'
               checked={newCar.is_automatic}
               onChange={({ target }) => {
-                setNewCar({ ...newCar, is_automatic: target.checked });
+                dispatch(setNewCar({ ...newCar, is_automatic: target.checked })) ;
             }}
           />
           </span>
@@ -68,7 +69,7 @@ export const AddCarForm = ({
                 type='radio'
                 name='engine'
                 value={engine}
-                onChange={() => setNewCar({ ...newCar, engine })}
+                onChange={() => dispatch(setNewCar({ ...newCar, engine })) }
                 checked={engine === newCar.engine}
                 required
             />
@@ -80,8 +81,7 @@ export const AddCarForm = ({
             type='number'
             value={newCar.number_of_doors}
             onChange={({ target }) =>
-              setNewCar({ ...newCar, number_of_doors: target.value })
-            }
+              dispatch(setNewCar({ ...newCar, number_of_doors: target.value }))}
             required
           />
         <button type="submit">

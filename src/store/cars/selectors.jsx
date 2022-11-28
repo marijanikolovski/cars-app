@@ -8,10 +8,13 @@ const selectSelect = (state) => state.cars.selectCars
 
 const selectPage = (state) => state.cars.page
 
+const selectNewCar = (state) => state.cars.newCar
+
 export { 
     selectCars, 
     selectSerch, 
     selectCarsFilter, 
     selectSelect, 
     selectPage,
+    selectNewCar
 };

@@ -19,7 +19,16 @@ export const carsSlice = createSlice({
       current_page: 1,
       cars_per_page: 3
     },
-    currentCar: null
+    newCar: {
+      brand: '',
+      model: '',
+      year: '',
+      max_speed: '',
+      is_automatic: false,
+      engine: '',
+      number_of_doors: '',
+    },
+    car:{}
   },
   reducers: {
     setCars: (state, action) => {
@@ -74,12 +83,17 @@ export const carsSlice = createSlice({
     setPaginated(state, action) {
       state.page.current_page = action.payload
     },
+
+    setNewCar(state, action) {
+      state.newCar = action.payload
+    },
   },
 });
 
 export const { setCars, deleteCar, setSerch, 
   setSelect, setSelectCar, setSelectAll, setDeselectAll, setSortByBrandAsc, 
-  setSortByBranDesc, setSortByMaxSpeedAsc, setSortByMaxSpeedDesc, setPaginated
+  setSortByBranDesc, setSortByMaxSpeedAsc, setSortByMaxSpeedDesc, setPaginated,
+  setNewCar
 } = carsSlice.actions;
 
 export default carsSlice.reducer;

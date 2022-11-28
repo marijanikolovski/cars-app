@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import CarsService from '../service/CarsService';
 import { AddCarForm } from '../component/AddCarForm';
+import { setNewCar } from '../store/cars/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectNewCar } from '../store/cars/selectors';
 
 const years = (start = 1990, end = 2018) => {
     return Array.apply(0, Array(end - start + 1))
@@ -10,31 +13,23 @@ const years = (start = 1990, end = 2018) => {
 const engines = ['diesel', 'petrol', 'electric', 'hybrid'];
 
 export const AddCar = () => {
+    const newCar = useSelector(selectNewCar)
+    const dispatch = useDispatch();
     const { id } = useParams();
     const history = useHistory()
-
-    const [newCar, setNewCar] = useState({
-        brand: '',
-        model: '',
-        year: years[0],
-        max_speed: '',
-        is_automatic: false,
-        engine: '',
-        number_of_doors: '',
-    });
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         if (id) {
-            await CarsService.edit(id, newCar);
+            dispatch(setNewCar(await CarsService.edit(id, newCar)));
         } else {
-            await CarsService.add(newCar);
+            dispatch(setNewCar(await CarsService.add(newCar)));
         }
         history.push('/cars');
     };
 
     const hadleResetForm = () => {
-        setNewCar({
+        dispatch(setNewCar({
             brand: '',
             model: '',
             year: years[0],
@@ -42,7 +37,7 @@ export const AddCar = () => {
             is_automatic: false,
             engine: '',
             number_of_doors: '',  
-        })
+        }))
     }
 
     const handlePreviewForm = () => {
@@ -59,8 +54,8 @@ export const AddCar = () => {
 
     const handleGetSingleCar = async (id) => {
         if (id) {
-            const response = await CarsService.get(id);
-            setNewCar(response);
+            const response = await CarsService.get(id) ;
+            dispatch(setNewCar(response)) ;
         }
     }
 
@@ -74,8 +69,6 @@ export const AddCar = () => {
         <div>
             <AddCarForm 
                 id={id}
-                newCar={newCar}
-                setNewCar={setNewCar}
                 years={years}
                 engines={engines}
                 onSubmit={handleOnSubmit}
