@@ -38,7 +38,7 @@ export const SingleCar = ({
 
   return (
     <li style={{
-      border: "1px solid " + (selectCar.select === id ? "red" : 'white'),
+      border: "1px solid " + (selectCar.select.includes(id) ? "red" : 'white'),
     }}>
       <h3>Brand: {brand}</h3>
       <h3>Model: {model}</h3>

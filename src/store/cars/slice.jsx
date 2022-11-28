@@ -37,16 +37,18 @@ export const carsSlice = createSlice({
     },
 
     setSelect(state, action) {
-      state.selectCars.select = action.payload
-      state.selectCars.counter += 1;
+      if (!state.selectCars.select.includes(action.payload)) {
+        state.selectCars.select.push(action.payload)
+      }
+      state.selectCars.counter = state.selectCars.select.length;
     },
 
     setSelectAll(state) {
-      state.selectCars.select = state.carsFilter.map((car) => car)
+      state.selectCars.select = state.carsFilter.map((car) => car.id)
     }, 
 
     setDeselectAll(state) {
-      state.selectCars.select = null
+      state.selectCars.select = []
     },
 
     setSortByBrandAsc(state) {
